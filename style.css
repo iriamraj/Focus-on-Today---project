@@ -1,0 +1,222 @@
+:root {
+  --backColour: #48a30012;
+  --headingColour: #48a300;
+  --heading2Colour: #61481c;
+  --mainBackColour: #fbfbfb;
+  --motivationColour: #858585;
+  --progress-holder: #48a3001a;
+  --task-doing-colour: #eeffe0;
+  --error-colour: #ff5151;
+  --tick-border-colour: #61481c4d;
+  --border-colour: #d9d9d9;
+  --goal-colour: #d9d9d9;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--backColour);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header h2 {
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--headingColour);
+  margin: 40px;
+}
+
+header h2 span {
+  color: var(--heading2Colour);
+}
+
+main {
+  width: 660px;
+  height: auto;
+  background-color: var(--mainBackColour);
+  border-radius: 20px;
+  padding: 29px 42px;
+  box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.main-heading {
+  display: flex;
+  align-items: center;
+  font-size: 32px;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.motivationText {
+  margin-top: 46px;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--motivationColour);
+}
+
+.progress-bar-holder {
+  margin-top: 18px;
+  background-color: var(--progress-holder);
+  border-radius: 15px;
+  height: 30px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background-color: var(--headingColour);
+  border-radius: inherit;
+  transition: width 0.5s;
+}
+
+.tast-doing {
+  width: 100%;
+  height: 100%;
+  color: var(--task-doing-colour);
+  font-weight: 400;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.error {
+  color: var(--error-colour);
+  margin: 18px 0px 47px 0px;
+  font-weight: 400;
+  font-size: 14px;
+  visibility: hidden;
+}
+
+.error-show {
+  visibility: visible;
+}
+
+.goal-holder {
+  border: 1px solid var(--border-colour);
+  border-radius: 17px;
+  padding: 29px 0px 29px 22px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 46px;
+}
+
+.tick-mark {
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--tick-border-colour);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tick-mark img {
+  display: none;
+}
+
+.tick-active img {
+  border: none;
+  display: block;
+}
+
+.tick-active {
+  border: none;
+}
+
+.goal-iput-block {
+  text-decoration: line-through;
+  color: var(--headingColour);
+}
+
+.goal-iput {
+  width: 100%;
+  background-color: inherit;
+  min-height: 100%;
+  border: none;
+  padding: 0px 0px 0px 22px;
+  outline: none;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.goal-iput::placeholder {
+  color: var(--goal-colour);
+}
+
+.motivation-text2 {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 81px;
+}
+
+.love {
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 66px;
+}
+
+@media screen and (max-width: 713px) {
+  /* body {
+        padding: 20px 80px 20px 80px; 
+    } */
+
+  main {
+    width: 90vw;
+    padding: 15px 20px;
+  }
+
+  header h2 {
+    font-size: 9.5vw;
+    margin: 20px;
+  }
+
+  .goal-holder {
+    padding: 16px 0px 16px 16px;
+    margin-bottom: 29px;
+  }
+
+  .main-heading {
+    font-size: 25px;
+  }
+
+  .motivationText {
+    font-size: 12px;
+    margin-top: 23px;
+  }
+
+  .error {
+    font-size: 12px;
+    margin: 18px 0px 25px 0px;
+  }
+
+  .progress-bar-holder {
+    height: 26px;
+  }
+
+  .tast-doing {
+    font-size: 12px;
+  }
+
+  .motivation-text2 {
+    margin-top: 30px;
+  }
+
+  .love {
+    margin-top: 23px;
+  }
+
+  /* .tick-mark {
+    margin-right: 10px;
+  } */
+}
