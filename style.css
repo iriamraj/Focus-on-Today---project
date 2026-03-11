@@ -166,6 +166,25 @@ main {
   margin-top: 66px;
 }
 
+.save {
+  width: 100%;
+  height: 40px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 17px;
+  background-color: var(--headingColour);
+  border: none;
+  border-radius: 17px;
+  color: white;
+  letter-spacing: 2px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.save:hover {
+  scale: 1.01 ;
+}
+
 @media screen and (max-width: 713px) {
   /* body {
         padding: 20px 80px 20px 80px; 
