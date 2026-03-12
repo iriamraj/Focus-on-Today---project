@@ -4,21 +4,39 @@ const error = document.querySelector(".error");
 const progressBar = document.querySelector(".progress-bar");
 const motivationText = document.querySelector(".motivationText");
 const motivationText2 = document.querySelector(".motivation-text2");
+const remainingTask = document.querySelector(".remainingTask");
 const save = document.querySelector(".save");
+const clear = document.querySelector(".clear");
 
 let progressBarWidth = 0;
+let remainingTaskLeft = 0;
 
-if (localStorage.firValue) {
-  goalIput[0].value = localStorage.firValue;
-} 
-if (localStorage.secValue) {
-  goalIput[1].value = localStorage.secValue;
-} 
-if (localStorage.thirValue) {
-  goalIput[2].value = localStorage.thirValue;
-}
+const localData = JSON.parse(localStorage.taskData || false);
 
-let a = [...tickMark].forEach((tick, i) => {
+const writeValue = [...goalIput].forEach((input) => {
+  [...tickMark].forEach((tick) => {
+    if (localData[input.id]?.isComplited === "true") {
+      input.previousElementSibling.children[0].classList.add("tick-active");
+
+      input.classList.add("goal-iput-block");
+    }
+  });
+
+  if (localData[input.id]?.task) {
+    input.value = localData[input.id].task;
+    input.setAttribute("disabled", "");
+  }
+  if (localData.progressBar) {
+    progressBarWidth = localData.progressBar;
+    progressBar.style.width = `${progressBarWidth}%`;
+  }
+  if (localData.remainingTask) {
+    remainingTaskLeft = localData.remainingTask;
+    remainingTask.innerText = remainingTaskLeft;
+  }
+});
+
+let temp = [...tickMark].forEach((tick, i) => {
   tick.addEventListener("click", () => {
     const isGoalInputValue = [...goalIput].every((input) => {
       return input.value;
@@ -35,14 +53,20 @@ let a = [...tickMark].forEach((tick, i) => {
       tick.parentElement.nextElementSibling.setAttribute("disabled", "");
       Number.parseFloat((progressBarWidth += 100 / 3));
       progressBar.style.width = `${progressBarWidth}%`;
+
+      remainingTaskLeft += 1;
+      remainingTask.innerText = remainingTaskLeft;
     } else {
       tick.parentElement.nextElementSibling.classList.remove("goal-iput-block");
       tick.parentElement.nextElementSibling.removeAttribute("disabled");
       Number.parseFloat((progressBarWidth -= 100 / 3));
-      if (progressBarWidth < 34) {
+      if (progressBarWidth < 0) {
         progressBarWidth = 0;
       }
       progressBar.style.width = `${progressBarWidth}%`;
+
+      remainingTaskLeft -= 1;
+      remainingTask.innerText = remainingTaskLeft;
     }
 
     if (progressBarWidth > 60) {
@@ -62,8 +86,20 @@ let a = [...tickMark].forEach((tick, i) => {
 });
 
 save.addEventListener("click", () => {
-  console.log(localStorage);
-  localStorage.firValue = goalIput[0].value;
-  localStorage.secValue = goalIput[1].value;
-  localStorage.thirValue = goalIput[2].value;
+  const taskObj = {};
+  goalIput.forEach((input) => {
+    const inputId = input.id;
+    taskObj[inputId] = {
+      task: `${input.value}`,
+      isComplited: `${input.previousElementSibling.children[0].classList[1] === "tick-active"}`,
+    };
+  });
+  taskObj.progressBar = `${progressBarWidth}`;
+  taskObj.remainingTask = remainingTaskLeft;
+  localStorage.taskData = JSON.stringify(taskObj);
+});
+
+clear.addEventListener("click", () => {
+  localStorage.clear();
+  location.reload();
 });
